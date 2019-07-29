@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             select 
 				id id,
 				name name
-			 from wf_def
+			 from abc_wf_def
 			 <where>	 
 				<if test="id != null">
 					and id = #{id}
@@ -20,12 +20,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       
       <!-- 插入一条记录 -->  
       <insert id ="insert" parameterType="org.lc.design.domain.Def">  
-            insert into  wf_def(id,name) 
+            insert into  abc_wf_def(id,name) 
             values (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR});
       </insert >
       
       <!-- 插入一条记录 -->  
       <delete id ="delete">  
-            delete from wf_def
+            delete from abc_wf_def
       </delete > 
 </mapper>  

@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.lc.design.dao.NodeMapper;
 import org.lc.design.domain.Node;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class NodeService {
@@ -19,10 +21,12 @@ public class NodeService {
 		return nodeMapper.query(node);
 	}
 	
+	@Transactional(rollbackFor=Exception.class,propagation=Propagation.REQUIRED)
 	public java.lang.Integer insert(Node node){
 		return nodeMapper.insert(node);
 	}
 	
+	@Transactional(rollbackFor=Exception.class,propagation=Propagation.REQUIRED)
 	public java.lang.Integer delete(){
 		return nodeMapper.delete();
 	}

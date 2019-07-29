@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				wf_name wfName,
 				wf_type wfType,
 				wf_json json
-			 from wf_node
+			 from abc_wf_node
 			<where>	 
 				<if test="id != null">
 					and id = #{id}
@@ -27,12 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       
       <!-- 插入一条记录 -->  
       <insert id ="insert" parameterType="org.lc.design.domain.Node">  
-            insert into  wf_node(id,wf_def_id,wf_code,wf_name,wf_type,wf_json) 
+            insert into  abc_wf_node(id,wf_def_id,wf_code,wf_name,wf_type,wf_json) 
             values (#{id,jdbcType=VARCHAR},#{wfDefId,jdbcType=VARCHAR},#{wfCode,jdbcType=VARCHAR},#{wfName,jdbcType=VARCHAR},#{wfType,jdbcType=VARCHAR},#{json,jdbcType=VARCHAR});
       </insert >
       
       <!-- 插入一条记录 -->  
       <delete id ="delete">  
-            delete from wf_node
+            delete from abc_wf_node
       </delete > 
 </mapper>  

@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				wf_from wfFrom,
 				wf_to wfTo,
 				wf_json json
-			 from wf_line
+			 from abc_wf_line
 			 <where>	 
 				<if test="id != null">
 					and id = #{id}
@@ -28,12 +28,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       
       <!-- 插入一条记录 -->  
       <insert id ="insert" parameterType="org.lc.design.domain.Line">  
-            insert into  wf_line(id,wf_def_id,wf_code,wf_name,wf_type,wf_from,wf_to,wf_json) 
+            insert into  abc_wf_line(id,wf_def_id,wf_code,wf_name,wf_type,wf_from,wf_to,wf_json) 
             values (#{id,jdbcType=VARCHAR},#{wfDefId,jdbcType=VARCHAR},#{wfCode,jdbcType=VARCHAR},#{wfName,jdbcType=VARCHAR},#{wfType,jdbcType=VARCHAR},#{wfFrom,jdbcType=VARCHAR},#{wfTo,jdbcType=VARCHAR},#{json,jdbcType=VARCHAR});
       </insert >
       
       <!-- 插入一条记录 -->  
       <delete id ="delete">  
-            delete from wf_line
+            delete from abc_wf_line
       </delete >    
 </mapper>  

@@ -24,10 +24,10 @@ function getRootPath(){
 }
 .table td{
 	margin:2px;
-	text-align:right;
+	text-align:left;
 }
 .table td input{
-	width:100%;
+	width:97%;
 	margin:6px;
 }
 </style>
@@ -37,15 +37,15 @@ function getRootPath(){
 	<input type="hidden" id="itemId" name="itemId" value=""/>
 	<table style="width:100%"  class="table">
 		<tr>
-			<td style="width:60px;" >编码：</td>
+			<td style="width:70px;"  align="right">编码：</td>
 			<td><input type="text" id="itemCode" name="itemCode" value=""/></td>
 		</tr>
 		<tr>
-			<td>名称：</td>
+			<td align="right">名称：</td>
 			<td><input type="text" id="itemName" name="itemName" value=""/></td>
 		</tr>
 		<tr>
-			<td>脚本：</td>
+			<td align="right">脚本：</td>
 			<td><input type="text" id="jsTxt" name="jsTxt" value=""/></td>
 		</tr>
 	</table>

@@ -8,9 +8,12 @@ import javax.annotation.Resource;
 
 import org.lc.common.util.JsonUtil;
 import org.lc.design.dao.DefMapper;
+import org.lc.design.domain.Def;
 import org.lc.design.domain.Line;
 import org.lc.design.domain.Node;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class DefService {
@@ -41,14 +44,24 @@ public class DefService {
 		return resMap;
 	}
 	
-	public void save(String id,String nodeTxt,String lineTxt) {
-		saveLine(id,lineTxt);
-		saveNode(id,nodeTxt);
+	/**
+	 * 保存
+	 * 
+	 * @param cond
+	 * @param nodeTxt
+	 * @param lineTxt
+	 */
+	@Transactional(rollbackFor=Exception.class,propagation=Propagation.REQUIRED)
+	public void save(Def cond,String nodeTxt,String lineTxt) {
+		saveLine(cond.getId(),lineTxt);
+		saveNode(cond.getId(),nodeTxt);
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void saveNode(String defId,String nodeTxt) {
+		//删除旧数据
 		nodeService.delete();
+		//插入新数据
 		List<Map<String,String>> nodeList = JsonUtil.toBean(nodeTxt, List.class);
 		for(Map<String,String> item:nodeList) {
 			Node node = new Node();
@@ -64,7 +77,9 @@ public class DefService {
 	
 	@SuppressWarnings("unchecked")
 	private void saveLine(String defId,String lineTxt) {
+		//删除旧数据
 		lineService.delete();
+		//插入新数据
 		List<Map<String,String>> LineList = JsonUtil.toBean(lineTxt, List.class);
 		for(Map<String,String> item:LineList) {
 			Line line = new Line();

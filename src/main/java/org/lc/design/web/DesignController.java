@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.lc.design.domain.Def;
 import org.lc.design.service.DefService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ public class DesignController {
 	
 	@RequestMapping("/init.action")
 	public String init(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("id", System.currentTimeMillis());
 		return "design/design";
 	}
 	
@@ -50,12 +52,11 @@ public class DesignController {
 	
 	@RequestMapping("/save.action")
 	@ResponseBody
-	public Map<String,Object> save(HttpServletRequest request, HttpServletResponse response) {
+	public Map<String,Object> save(Def cond,HttpServletRequest request) {
 		Map<String,Object> resMap = new HashMap<String,Object>();
 		String nodeTxt = request.getParameter("nodeTxt");
 		String lineTxt = request.getParameter("lineTxt");
-		String id = request.getParameter("id");
-		defService.save(id, nodeTxt, lineTxt);
+		defService.save(cond, nodeTxt, lineTxt);
 		resMap.put("result", "success");
 		return resMap;
 	}

@@ -52,6 +52,7 @@ WorkflowDesign.showItemLineDlg = function(data){
 	layer.open({
 	  type: 2,
 	  title:"连接线信息",
+	  offset: '100px',
 	  area: ['800px', '300px'],
 	  fixed: true, //不固定
 	  maxmin: false,
