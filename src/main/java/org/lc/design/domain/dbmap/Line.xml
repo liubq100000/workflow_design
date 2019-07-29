@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding= "UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+  
+<mapper namespace= "org.lc.design.dao.LineMapper" > 
+      <!-- 查询一条记录 -->  
+      <select id ="query" parameterType="org.lc.design.domain.Line" resultType="org.lc.design.domain.Line">  
+            select 
+				id id,
+				wf_def_id wfDefId,
+				wf_code wfCode,
+				wf_name wfName,
+				wf_type wfType,
+				wf_from wfFrom,
+				wf_to wfTo,
+				wf_json json
+			 from wf_line
+			 <where>	 
+				<if test="id != null">
+					and id = #{id}
+				</if>
+				<if test="wfDefId != null">
+					and wf_def_id = #{wfDefId}
+				</if>
+			</where>
+      </select >
+      
+      <!-- 插入一条记录 -->  
+      <insert id ="insert" parameterType="org.lc.design.domain.Line">  
+            insert into  wf_line(id,wf_def_id,wf_code,wf_name,wf_type,wf_from,wf_to,wf_json) 
+            values (#{id,jdbcType=VARCHAR},#{wfDefId,jdbcType=VARCHAR},#{wfCode,jdbcType=VARCHAR},#{wfName,jdbcType=VARCHAR},#{wfType,jdbcType=VARCHAR},#{wfFrom,jdbcType=VARCHAR},#{wfTo,jdbcType=VARCHAR},#{json,jdbcType=VARCHAR});
+      </insert >
+      
+      <!-- 插入一条记录 -->  
+      <delete id ="delete">  
+            delete from wf_line
+      </delete >    
+</mapper>  

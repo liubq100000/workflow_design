@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding= "UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+  
+<mapper namespace= "org.lc.design.dao.DefMapper" >  
+
+     <!-- 查询一条记录 -->  
+      <select id ="query" parameterType="org.lc.design.domain.Def" resultType="org.lc.design.domain.Def">  
+            select 
+				id id,
+				name name
+			 from wf_def
+			 <where>	 
+				<if test="id != null">
+					and id = #{id}
+				</if>
+			</where>
+      </select >
+      
+      <!-- 插入一条记录 -->  
+      <insert id ="insert" parameterType="org.lc.design.domain.Def">  
+            insert into  wf_def(id,name) 
+            values (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR});
+      </insert >
+      
+      <!-- 插入一条记录 -->  
+      <delete id ="delete">  
+            delete from wf_def
+      </delete > 
+</mapper>  

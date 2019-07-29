@@ -1,0 +1,30 @@
+package org.lc.design.service;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.lc.design.dao.LineMapper;
+import org.lc.design.domain.Line;
+import org.springframework.stereotype.Component;
+
+@Component
+public class LineService {
+
+	@Resource(name = "lineMapper")
+	private LineMapper lineMapper;
+
+	 
+	public List<Line> query(Line line){
+		return lineMapper.query(line);
+	}
+	
+	public java.lang.Integer insert(Line line){
+		return lineMapper.insert(line);
+	}
+	
+	public java.lang.Integer delete(){
+		return lineMapper.delete();
+	}
+	
+}

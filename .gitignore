@@ -1,0 +1,9 @@
+/.idea
+/*.iml
+/target
+/overlays
+/src/main/resources/*.dat
+/.project
+/.classpath
+/.settings
+/pom.xml
