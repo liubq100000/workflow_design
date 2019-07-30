@@ -37,9 +37,10 @@ function fishflow(opts){
     var workStage = undefined;
     var canvas = undefined;
     var showItemDlg = options.showItemDlg;
-    var graphData = {nodes:{},lines:{}};			//图形数据，记录节点以及连接线数据
-    var newNodeRecord = {idx : 1 , label : "节点_"};	//添加新节点配置信息。配置当前最大索引号，默认标签前缀
-    var newLineRecord = {idx : 1 };					//添加新连接线配置信息。配置当前最大索引号
+  //图形数据，记录节点以及连接线数据
+    var graphData = {nodes:{},lines:{}};			
+	//配置当前最大索引号，默认标签前缀
+    var newItemRecord = {idx : (new Date().getTime()) , label : "节点_"};  
 
     var selectedElement = null;
     /*========================================================================
@@ -1152,8 +1153,8 @@ function fishflow(opts){
 				var h = 100;
 				var w = 24;
                 var nodeItemData = {
-                    "name"   : newNodeRecord.label+newNodeRecord.idx
-                    ,"id"     : "node"+newNodeRecord.idx
+                    "name"   : newItemRecord.label+newItemRecord.idx
+                    ,"id"     : "node"+newItemRecord.idx
                     ,"left"  : offsetLeft
                     ,"top"   : offsetTop
                     ,"type"  : tbxItemType
@@ -1161,7 +1162,7 @@ function fishflow(opts){
                     ,"height": w
                 };
                 addNodeItem(nodeItemData);
-                newNodeRecord.idx++;
+                newItemRecord.idx++;
                 $(".ico_pointer",toolBox).click();
             };
         });
@@ -1226,13 +1227,13 @@ function fishflow(opts){
                     var fromNodeId = getActualNodeId(lineStart.nodeId,true);
                     var toNodeId = getActualNodeId(nodeId,true);
                     var lineData = {
-                        "id"   :"newLine"+newLineRecord.idx,
+                        "id"   :"newLine"+newItemRecord.idx,
                         "from" :fromNodeId,
                         "to"   :toNodeId,
                         "type" : "linkLine"
                     };
                     addLinkedLine(lineData);
-                    newLineRecord.idx++;
+                    newItemRecord.idx++;
                 }
             }
 
