@@ -53,10 +53,29 @@ public class DefService {
 	 */
 	@Transactional(rollbackFor=Exception.class,propagation=Propagation.REQUIRED)
 	public void save(Def cond,String nodeTxt,String lineTxt) {
+		//修改
+		modify(cond);
+		//保存连接线
 		saveLine(cond.getId(),lineTxt);
+		//保存节点
 		saveNode(cond.getId(),nodeTxt);
 	}
 	
+	/**
+	 * 修改
+	 * @param cond
+	 */
+	private void modify(Def cond) {
+		defMapper.delete();
+		defMapper.insert(cond);
+	}
+	
+	/**
+	 * 保存节点
+	 * 
+	 * @param defId
+	 * @param nodeTxt
+	 */
 	@SuppressWarnings("unchecked")
 	private void saveNode(String defId,String nodeTxt) {
 		//删除旧数据
@@ -75,6 +94,12 @@ public class DefService {
 		}
 	}
 	
+	/**
+	 * 保存连接线
+	 * 
+	 * @param defId
+	 * @param lineTxt
+	 */
 	@SuppressWarnings("unchecked")
 	private void saveLine(String defId,String lineTxt) {
 		//删除旧数据

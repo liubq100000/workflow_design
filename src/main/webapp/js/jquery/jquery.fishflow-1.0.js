@@ -470,13 +470,9 @@ function fishflow(opts){
         //不为开始或结束节点，那么为普通节点
         if( data.type != "split"){
             var width = data.width? data.width:100;
-            if(width<100){
-            	width = 100;
-            }            
+            width = 100;          
             var height = data.height? data.height:24;
-            if(height<24){
-            	height = 24;
-            }  
+            height = 24 
             if(top<0)top=0;
             if(left<0)left=0;
             //绘制节点

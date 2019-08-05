@@ -110,10 +110,12 @@ WorkflowDesign.saveFun = function(){
 	var gpData = WorkflowDesign.dfg.getGraphData();
 	var nodeTxt = WorkflowDesign.simpleJson2Text(gpData.nodes);
 	var lineTxt = WorkflowDesign.simpleJson2Text(gpData.lines);
+	var wkflowName = $("#wkflowName").val();
+	var wkflowMaxTime = $("#wkflowMaxTime").val();
 	$.ajax({
 		type : "POST",
 		url : getRootPath()+"/design/save.action",
-		data : {id:"1","nodeTxt": nodeTxt,"lineTxt":lineTxt},
+		data : {id:"1","name":wkflowName,"maxTime":wkflowMaxTime,"nodeTxt": nodeTxt,"lineTxt":lineTxt},
 		dataType : "json",
 		success : function(data) {
 			alert(data.result);

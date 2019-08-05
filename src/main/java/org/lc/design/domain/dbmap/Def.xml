@@ -9,7 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <select id ="query" parameterType="org.lc.design.domain.Def" resultType="org.lc.design.domain.Def">  
             select 
 				id id,
-				name name
+				name name,
+				max_time maxTime
 			 from abc_wf_def
 			 <where>	 
 				<if test="id != null">
@@ -20,8 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       
       <!-- 插入一条记录 -->  
       <insert id ="insert" parameterType="org.lc.design.domain.Def">  
-            insert into  abc_wf_def(id,name) 
-            values (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR});
+            insert into  abc_wf_def(id,name,max_time) 
+            values (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{maxTime,jdbcType=NUMERIC});
       </insert >
       
       <!-- 插入一条记录 -->  

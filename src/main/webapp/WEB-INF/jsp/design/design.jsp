@@ -26,11 +26,15 @@ function getRootPath(){
 <style> 
 body{ text-align:center} 
 #dgxDemo{ margin:0 auto; width:1200px; border:1px solid #F00} 
-#btnBar{ margin:0 auto; width:1200px;height:20px; border:1px solid #F00} 
+#btnBar{ margin:0 auto; width:1200px;height:30px; border:1px solid #F00;text-align:left} 
+#btnBar input{ margin:2px;width:400px;} 
 </style>
 </head>
 <body>
-<div id="btnBar"></div>
+<div id="btnBar">
+<input type="text" id="wkflowName" name="wkflowName" value="监管主体业务流程">
+<input type="text" id="wkflowMaxTime" name="wkflowMaxTime" value="90">
+</div>
 <div id="dgxDemo"></div>
 <div id="messageDlg"></div>
 <script type="text/javascript" src="${sysPath}/js/design/design.js"></script>

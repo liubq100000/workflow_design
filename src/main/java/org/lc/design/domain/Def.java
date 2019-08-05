@@ -3,6 +3,7 @@ package org.lc.design.domain;
 public class Def {
 	private String id;
 	private String name;
+	private Integer maxTime;
 	public String getId() {
 		return id;
 	}
@@ -15,4 +16,11 @@ public class Def {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public Integer getMaxTime() {
+		return maxTime;
+	}
+	public void setMaxTime(Integer maxTime) {
+		this.maxTime = maxTime;
+	}
+	
 }
