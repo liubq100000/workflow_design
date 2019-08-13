@@ -3,7 +3,10 @@ package org.lc.design.domain;
 public class Def {
 	private String id;
 	private String name;
-	private Integer maxTime;
+	private String code;
+	private String txt;
+	private String content;
+	
 	public String getId() {
 		return id;
 	}
@@ -16,11 +19,24 @@ public class Def {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getMaxTime() {
-		return maxTime;
+	public String getCode() {
+		return code;
 	}
-	public void setMaxTime(Integer maxTime) {
-		this.maxTime = maxTime;
+	public void setCode(String code) {
+		this.code = code;
 	}
+	public String getTxt() {
+		return txt;
+	}
+	public void setTxt(String txt) {
+		this.txt = txt;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	 
 	
 }

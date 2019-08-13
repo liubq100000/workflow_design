@@ -27,8 +27,10 @@ public class LineService {
 	}
 	
 	@Transactional(rollbackFor=Exception.class,propagation=Propagation.REQUIRED)
-	public java.lang.Integer delete(){
-		return lineMapper.delete();
+	public java.lang.Integer delete(String flowId){
+		Line cond = new Line();
+		cond.setWfDefId(flowId);
+		return lineMapper.delete(cond);
 	}
 	
 }

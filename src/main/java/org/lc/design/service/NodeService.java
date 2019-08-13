@@ -27,8 +27,10 @@ public class NodeService {
 	}
 	
 	@Transactional(rollbackFor=Exception.class,propagation=Propagation.REQUIRED)
-	public java.lang.Integer delete(){
-		return nodeMapper.delete();
+	public java.lang.Integer delete(String flowId){
+		Node node = new Node();
+		node.setWfDefId(flowId);
+		return nodeMapper.delete(node);
 	}
 	
 }

@@ -9,5 +9,5 @@ public interface DefMapper {
 	
 	public java.lang.Integer insert(Def def);
 	
-	public java.lang.Integer delete();
+	public java.lang.Integer delete(Def delCond);
 }

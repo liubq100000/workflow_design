@@ -1,12 +1,15 @@
 package org.lc.design.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.lc.common.util.JsonUtil;
 import org.lc.design.domain.Def;
 import org.lc.design.service.DefService;
 import org.springframework.stereotype.Controller;
@@ -29,7 +32,11 @@ public class DesignController {
 	
 	@RequestMapping("/init.action")
 	public String init(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("id", System.currentTimeMillis());
+		String flowId= request.getParameter("flowId");
+		if(flowId == null||flowId.trim().length()<=0) {
+			flowId = "10001";
+		}
+		request.setAttribute("flowId", flowId);
 		return "design/design";
 	}
 	
@@ -46,18 +53,43 @@ public class DesignController {
 	@RequestMapping("/get.action")
 	@ResponseBody
 	public Map<String,Object> get(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id");
-		return defService.query(id);
+		Map<String,Object> resMap = new HashMap<String,Object>();
+		String flowId= request.getParameter("flowId");
+		Def def = defService.query(flowId);
+		if(def == null) {
+			resMap.put("json", "");
+		} else {
+			resMap.put("json", def.getContent());
+		}		
+		return resMap;
 	}
 	
 	@RequestMapping("/save.action")
 	@ResponseBody
-	public Map<String,Object> save(Def cond,HttpServletRequest request) {
+	public Map<String,Object> save(HttpServletRequest request) {
 		Map<String,Object> resMap = new HashMap<String,Object>();
-		String nodeTxt = request.getParameter("nodeTxt");
-		String lineTxt = request.getParameter("lineTxt");
-		defService.save(cond, nodeTxt, lineTxt);
-		resMap.put("result", "success");
+		try {
+			Map<String,Integer> data = new HashMap<>();
+			data.put("x",100);
+			data.put("y",100);
+			List<Map<String,Integer>> dataList = new ArrayList<>();
+			dataList.add(data);
+			Map<String,List<Map<String,Integer>>> dataM = new HashMap<>();
+			dataM.put("xxxx", dataList);
+			
+			
+			System.out.println(JsonUtil.toString(dataM));
+			String content = request.getParameter("content");
+			String flowId= request.getParameter("flowId");		 
+			defService.save(flowId, content);
+		
+			resMap.put("code", "200");
+			resMap.put("message", "保存成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			resMap.put("code", "500");
+			resMap.put("message", e.getMessage());
+		}
 		return resMap;
 	}
 
