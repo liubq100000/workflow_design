@@ -5,7 +5,19 @@ $.ajaxSetup({
 
 //扩展属性
 busiDesign.extendInfoFun = function(nowType,flowInfo,extInfo){
-	
+	var type = nowType;
+	var flowCode = flowInfo["code"].value;
+	var flowName = flowInfo["name"].value;
+	var tarCode = extInfo["code"].value;
+	var tarName = extInfo["text"].value;
+	var url = getRootPath()+"/design/openExtend.action";
+	url +="?type="+type;
+	url +="&flowCode="+flowCode;
+	url +="&flowName="+flowName;
+	url +="&tarCode="+tarCode;
+	url +="&tarName="+tarName;
+	url +="&n_="+(new Date().getTime());
+	window.open(encodeURI(url))
 }
 //保存数据
 busiDesign.save = function(data){

@@ -69,20 +69,9 @@ public class DesignController {
 	public Map<String,Object> save(HttpServletRequest request) {
 		Map<String,Object> resMap = new HashMap<String,Object>();
 		try {
-			Map<String,Integer> data = new HashMap<>();
-			data.put("x",100);
-			data.put("y",100);
-			List<Map<String,Integer>> dataList = new ArrayList<>();
-			dataList.add(data);
-			Map<String,List<Map<String,Integer>>> dataM = new HashMap<>();
-			dataM.put("xxxx", dataList);
-			
-			
-			System.out.println(JsonUtil.toString(dataM));
 			String content = request.getParameter("content");
 			String flowId= request.getParameter("flowId");		 
-			defService.save(flowId, content);
-		
+			defService.save(flowId, content);		
 			resMap.put("code", "200");
 			resMap.put("message", "保存成功");
 		} catch (Exception e) {
@@ -92,5 +81,32 @@ public class DesignController {
 		}
 		return resMap;
 	}
+	
+	@RequestMapping("/saveExtend.action")
+	@ResponseBody
+	public Map<String,Object> saveExtend(HttpServletRequest request) {
+		Map<String,Object> resMap = new HashMap<String,Object>();		 
+		return resMap;
+	}
+	
+	@RequestMapping("/openExtend.action")
+	public String openExtend(HttpServletRequest request) {
+		String type = request.getParameter("type");
+		String flowCode = request.getParameter("flowCode");
+		String flowName = request.getParameter("flowName");
+		String tarCode = request.getParameter("tarCode");
+		String tarName = request.getParameter("tarName");
+		request.setAttribute("type", type);
+		request.setAttribute("flowCode", flowCode);
+		request.setAttribute("tarCode", tarCode);
+		request.setAttribute("flowName", flowName);
+		request.setAttribute("tarName", tarName);
+		if("path".equalsIgnoreCase(type)) {
+			return "busi_design/lineDesign";
+		} else {
+			return "busi_design/nodeDesign";
+		}		
+	}
+	
 
 }

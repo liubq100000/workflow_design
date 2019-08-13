@@ -11,8 +11,8 @@ $.extend(true,myflow.config.rect,{
 });
 
 $.extend(true,myflow.config.props.props,{
-	name : {name:'name', label:'名称', value:'新建流程', editor:function(){return new myflow.editors.inputEditor();}},
-	key : {name:'key', label:'标识', value:'', editor:function(){return new myflow.editors.inputEditor();}},
+	code : {name:'code', label:'编码', value:'', editor:function(){return new myflow.editors.inputEditor();}},
+	name : {name:'name', label:'名称', value:'流程'+(new Date().getTime()), editor:function(){return new myflow.editors.inputEditor();}},	
 	desc : {name:'desc', label:'描述', value:'', editor:function(){return new myflow.editors.inputEditor();}}
 });
 
@@ -58,8 +58,8 @@ $.extend(true,myflow.config.tools.states,{
 		text : {text:'状态'},
 		img : {src : getRootPath()+'/img/48/task_empty.png',width : 48, height:48},
 		props : {
-			text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'状态'},
-			code: {name:'code', label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}}
+			code: {name:'code', label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}},
+			text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'状态'}			
 		}},
 	fork : {showType: 'image',type : 'fork',
 		name : {text:'<<fork>>'},
@@ -67,8 +67,8 @@ $.extend(true,myflow.config.tools.states,{
 		img : {src : getRootPath()+'/img/48/gateway_parallel.png',width :48, height:48},
 		attr : {width:50 ,heigth:50 },
 		props : {
-			text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'分支'},
-			code: {name:'code', label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}}
+			code: {name:'code', label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}},
+			text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'分支'}
 		}},
 	join : {showType: 'image',type : 'join',
 		name : {text:'<<join>>'},
@@ -76,25 +76,25 @@ $.extend(true,myflow.config.tools.states,{
 		img : {src : getRootPath()+'/img/48/gateway_parallel.png',width :48, height:48},
 		attr : {width:50 ,heigth:50 },
 		props : {
-			text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'合并'},
-			code: {name:'code', label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}}
+			code: {name:'code', label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}},
+			text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'合并'}
 		}},
 	task : {showType: 'text',type : 'task',
 		name : {text:'<<task>>'},
 		text : {text:'任务'},
 		img : {src : getRootPath()+'/img/48/task_empty.png',width :48, height:48},
 		props : {
-			text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'任务'},
-			code: {name:'code', label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}}
+			code: {name:'code', label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}},
+			text: {name:'text', label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'任务'}
 		}}
 });
 
 
 
 $.extend(true,myflow.config.tools.path,{		
-	props : {
-			text: {name:'text',label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'开始'},
-			code: {name:'code', label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}}
+	props : {		
+		code: {name:'code',label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}},
+		text: {name:'text',label: '显示', value:'连接线', editor: function(){return new myflow.editors.textEditor();}}
 	}
 });
 

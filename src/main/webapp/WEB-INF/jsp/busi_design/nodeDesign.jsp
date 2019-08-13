@@ -34,15 +34,17 @@ function getRootPath(){
 </head>
 <body>
 <div style="width:100%">
-	<input type="hidden" id="itemId" name="itemId" value=""/>
+	<input type="hidden" id="type" name="type" value="${type}"/>
+	<input type="hidden" id="flowCode" name="flowCode" value="${flowCode}" />
+	<input type="hidden" id="flowName" name="flowName" value="${flowName}" />
 	<table style="width:100%"  class="table">
 		<tr>
 			<td style="width:70px;"  align="right">编码：</td>
-			<td><input type="text" id="itemCode" name="itemCode" value=""/></td>
+			<td><input type="text" id="itemCode" name="itemCode" value="${tarCode}" readonly/></td>
 		</tr>
 		<tr>
 			<td align="right">名称：</td>
-			<td><input type="text" id="itemName" name="itemName" value=""/></td>
+			<td><input type="text" id="itemName" name="itemName" value="${tarName}" readonly/></td>
 		</tr>
 		<tr>
 			<td align="right">脚本：</td>

@@ -46,6 +46,11 @@ $.extend(true, myflow.editors, {
 			_props=props; _k=k; _div=div; _src=src; _r=r;			
 			var newInputId=src.getId();
 			newInputId+="_"+k;
+			var nowValue=props[_k].value;
+			if(_k=='code'&&nowValue == ''){
+				nowValue = _k+"_"+(new Date().getTime());
+				props[_k].value = nowValue;
+			}
 			$('<input style="width:100%;" id="'+newInputId+'"/>').val(props[_k].value).change(function(){
 				props[_k].value = $(this).val();				
 			}).appendTo('#'+_div);

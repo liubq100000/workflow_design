@@ -703,20 +703,20 @@
         // 函数----------------		
         // 转化json字串
         this.toJson = function () {
-			var data = "{props:{";
+			var data = "{\"props\":{";
 			for (var k in _o.props) {
 				if(k == "text"){
 					continue;
 				}
-                data += k + ":{value:'" + _o.props[k].value + "'},";
+                data += "\""+k + "\":{\"value\":\"" + _o.props[k].value + "\"},";
             }
 			if (data.substring(data.length - 1, data.length) == ',')
                 data = data.substring(0, data.length - 1);
-            data += "},type:'" + _o.type + "',ID:'" + (!_o.ID ? "" : _o.ID) + "',text:{text:'"
-                + (!_text.node.textContent ? "" : _text.node.textContent) + "'}, attr:{ x:"
-                + Math.round(_rect.attr('x')) + ", y:"
-                + Math.round(_rect.attr('y')) + ", width:"
-                + Math.round(_rect.attr('width')) + ", height:"
+            data += "},\"type\":\"" + _o.type + "\",\"ID\":\"" + (!_o.ID ? "" : _o.ID) + "\",\"text\":{\"text\":\""
+                + (!_text.node.textContent ? "" : _text.node.textContent) + "\"}, \"attr\":{ \"x\":"
+                + Math.round(_rect.attr('x')) + ",\"y\":"
+                + Math.round(_rect.attr('y')) + ", \"width\":"
+                + Math.round(_rect.attr('width')) + ", \"height\":"
                 + Math.round(_rect.attr('height')) + "},";
            
             if (data.substring(data.length - 1, data.length) == ',')
@@ -1019,8 +1019,7 @@
 
                 while (d) {
                     if (d.type() == 'big')
-                        data += "{x:" + Math.round(d.pos().x) + ",y:"
-                            + Math.round(d.pos().y) + "},";
+                        data += "{\"x\":" + Math.round(d.pos().x) + ",\"y\":" + Math.round(d.pos().y) + "},";
                     d = d.right();
                 }
                 if (data.substring(data.length - 1, data.length) == ',')
@@ -1232,13 +1231,13 @@
         };
         // 转化json数据
         this.toJson = function () {
-            var data = "{lineID:'" + (!_o.lineID ? "" : _o.lineID) + "',from:'" + _from.getId() + "',to:'" + _to.getId()
-                + "', dots:" + _dotList.toJson() + ",text:{text:'"
-                + _text.attr('text') + "',textPos:{x:"
-                + Math.round(_textPos.x) + ",y:" + Math.round(_textPos.y)
-                + "}}, props:{";
+            var data = "{\"lineID\":\"" + (!_o.lineID ? "" : _o.lineID) + "\",\"from\":\"" + _from.getId() + "\",\"to\":\"" + _to.getId()
+                + "\", \"dots\":" + _dotList.toJson() + ",\"text\":{\"text\":\""
+                + _text.attr('text') + "\",\"textPos\":{\"x\":"
+                + Math.round(_textPos.x) + ",\"y\":" + Math.round(_textPos.y)
+                + "}}, \"props\":{";
             for (var k in _o.props) {
-                data += k + ":{value:'" + _o.props[k].value + "'},";
+                data += "\""+k + "\":{\"value\":\"" + _o.props[k].value + "\"},";
             }
             if (data.substring(data.length - 1, data.length) == ',')
                 data = data.substring(0, data.length - 1);
@@ -1573,32 +1572,30 @@
 
             function getJson() {				
                 var data = '{';
-				data += 'states:{';
+				data += '\"states\":{';
                 for (var k in _states) {
                     if (_states[k]) {
-                        data += _states[k].getId() + ':'
-                                + _states[k].toJson() + ',';
+                        data +="\""+ _states[k].getId() + '\":' + _states[k].toJson() + ',';
                     }
                 }
                 if (data.substring(data.length - 1, data.length) == ',')
                     data = data.substring(0, data.length - 1);
                 data += '}';
-				data += ',paths:{';
+				data += ',\"paths\":{';
                 for (var k in _paths) {
                     if (_paths[k]) {
-                        data += _paths[k].getId() + ':'
-                                + _paths[k].toJson() + ',';
+                        data += "\"" + _paths[k].getId() + '\":' + _paths[k].toJson() + ',';
                     }
                 }
                 if (data.substring(data.length - 1, data.length) == ',')
                     data = data.substring(0, data.length - 1);
                 //data += '},props:{props:{';
                 data += '}';
-				data += ',infos:{';
+				data += ',\"infos\":{';
 				var tempProp = myflow.config.props.props;
 				for (var k in tempProp) {
                     if (tempProp[k]) {
-                        data += "'"+tempProp[k].name  + "':'" + tempProp[k].value + "',";
+                        data += "\""+tempProp[k].name  + "\":\"" + tempProp[k].value + "\",";
                     }
                 }
                 if (data.substring(data.length - 1, data.length) == ',')
