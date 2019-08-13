@@ -34,21 +34,17 @@ function getRootPath(){
 </head>
 <body>
 <div style="width:100%">
-	<div style="width:100%;text-align:center;padding:5px;"><span>节点扩展数据</span></div>
-	<input type="hidden" id="init_type" name="init_type" value="${type}"/>	
-	<table style="width:100%" class="table">		
+	<div style="width:100%;text-align:center;padding:5px;"><span>流程扩展数据</span></div>
+	<input type="hidden" id="init_type" name="init_type" value="${type}"/>
+	<table style="width:100%" class="table">
+		<input type="hidden" id="init_tarCode" name="init_tarCode" value="${tarCode}"/>
+		<input type="hidden" id="init_tarName" name="init_tarName" value="${tarName}"/>
 		<tr>		
 			<td style="width:80px;" align="right">流程编码：</td>
 			<td><input type="text" id="init_flowCode" name="init_flowCode" value="${flowCode}" readonly/></td>	
 			<td style="width:80px;" align="right">流程名称：</td>
 			<td><input type="text" id="init_flowName" name="init_flowName" value="${flowName}" readonly/></td>
 		</tr>
-		<tr>
-			<td align="right">编码：</td>
-			<td><input type="text" id="init_tarCode" name="init_tarCode" value="${tarCode}" readonly/></td>		
-			<td align="right">名称：</td>
-			<td><input type="text" id="init_tarName" name="init_tarName" value="${tarName}" readonly/></td>
-		</tr>		
 	</table>
 	<form id="infoForm">	
 	<table style="width:100%" class="table">

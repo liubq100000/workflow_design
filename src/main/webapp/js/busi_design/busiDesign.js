@@ -8,8 +8,15 @@ busiDesign.extendInfoFun = function(nowType,flowInfo,extInfo){
 	var type = nowType;
 	var flowCode = flowInfo["code"].value;
 	var flowName = flowInfo["name"].value;
-	var tarCode = extInfo["code"].value;
-	var tarName = extInfo["text"].value;
+	var tarCode = "";
+	var tarName = "";
+	if(extInfo["text"]){
+		tarCode = extInfo["code"].value;
+		tarName = extInfo["text"].value;
+	} else {
+		tarCode = "-1";
+		tarName = "-1";
+	}
 	var url = getRootPath()+"/design/openExtend.action";
 	url +="?type="+type;
 	url +="&flowCode="+flowCode;
