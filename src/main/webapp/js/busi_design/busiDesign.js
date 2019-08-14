@@ -56,7 +56,14 @@ busiDesign.get = function(){
 		dataType : "json",
 		success : function(data) {			
 			if(data){
-				designFlow.init(data.json,busiDesign.save,busiDesign.extendInfoFun);
+				var mode = $("#showMode").val();
+				if("view" == mode){
+					designFlow.view(data.json);
+				} else {
+					designFlow.init(data.json,busiDesign.save,busiDesign.extendInfoFun);
+				}
+				
+				
 			}			
 		}
 	});

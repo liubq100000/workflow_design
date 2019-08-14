@@ -40,17 +40,19 @@ public class DesignController {
 			flowId = "10001";
 		}
 		request.setAttribute("flowId", flowId);
+		request.setAttribute("mode", "edit");
 		return "design/design";
 	}
 	
-	@RequestMapping("/nodeDesign.action")
-	public String nodeDesign(HttpServletRequest request, HttpServletResponse response) {
-		return "design/nodeDesign";
-	}
-	
-	@RequestMapping("/lineDesign.action")
-	public String lineDesign(HttpServletRequest request, HttpServletResponse response) {
-		return "design/lineDesign";
+	@RequestMapping("/view.action")
+	public String view(HttpServletRequest request, HttpServletResponse response) {
+		String flowId= request.getParameter("flowId");
+		if(flowId == null||flowId.trim().length()<=0) {
+			flowId = "10001";
+		}
+		request.setAttribute("flowId", flowId);
+		request.setAttribute("mode", "view");
+		return "design/design";
 	}
 	
 	@RequestMapping("/get.action")

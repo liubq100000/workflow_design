@@ -1,0 +1,15 @@
+.table{
+
+}
+.table td{
+	padding-left:15px;
+	text-align:left;
+}
+.table td input{
+	width:100%;
+	padding-left:6px;
+}
+.table td textarea{
+	width:100%;
+	padding-left:6px;
+}

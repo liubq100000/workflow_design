@@ -26,9 +26,9 @@
 </head>
 <body>
 	<input type="hidden" id="queryCondFlowId" name="queryCondFlowId" value="${flowId}">
-	<div id="myflow_tools" class="ui-widget-content">
-	<div id="myflow_tools_handle" style="text-align: center;"
-		class="ui-widget-header"> 工具集 </div>
+	<input type="hidden" id="showMode" name="showMode" value="${mode}">
+	<div id="myflow_tools" class="ui-widget-content" style="display:none">
+	<div id="myflow_tools_handle" style="text-align: center;" class="ui-widget-header"> 工具集 </div>
 
 	<div class="node" id="myflow_revoke"><img src="${sysPath}/img/save.gif" />&nbsp;&nbsp;撤销</div>
 	<div class="node" id="myflow_redraw"><img src="${sysPath}/img/save.gif" />&nbsp;&nbsp;重绘</div>
@@ -52,7 +52,7 @@
 	<div class="node state" id="end-error" type="end-error"><img src="${sysPath}/img/16/end_event_error.png" />&nbsp;&nbsp;错误</div>
 	</div>
 
-	<div id="myflow_props" class="ui-widget-content">
+	<div id="myflow_props" class="ui-widget-content" style="display:none">
 	<div id="myflow_props_handle" class="ui-widget-header">属性</div>
 	<table border="1" width="100%" cellpadding="0" cellspacing="0">
 		<tr>

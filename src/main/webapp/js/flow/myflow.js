@@ -773,8 +773,11 @@
 
     myflow.path = function (o, r, from, to, guid, ec,dots,id) {
         var _this = this, _r = r, _o = $.extend(true, {}, myflow.config.path), _path,_markpath, _arrow, _text, _textPos = _o.text.textPos, _ox, _oy, _from = from, _to = to, _id = id || 'path'
-            + myflow.util.nextId(), _dotList, _autoText = true; _o.lineID = guid; oec = (ec > 0 ? (parseInt(ec) == 1 ? 25 : parseInt(ec) * 9 + 22) : 0);
-         // 点
+            + myflow.util.nextId(), _dotList, _autoText = true; _o.lineID = guid; oec = (ec > 0 ? (parseInt(ec) == 1 ? 25 : parseInt(ec) * 9 + 22) : 0);       
+        if(typeof(_o.props["code"]) == 'undifinded' || _o.props["code"].value == ''){
+        	_o.props["code"].value="code_"+(new Date().getTime());
+        } 
+        // 点
         function dot(type, pos, left, right) {
             var _this = this, _t = type, _n, _lt = left, _rt = right, _ox, _oy, // 缓存移动前时位置
             _pos = pos; // 缓存位置信息{x,y}, 注意：这是计算出中心点
@@ -1200,20 +1203,14 @@
                 _autoText = false;
             }
             //$('body').append('['+_autoText+','+_text.attr('text')+','+src.getId()+','+_to.getId()+']');
-            if (_autoText) {
+            if (false) {
                 if (_to.getId() == src.getId()) {
                     //$('body').append('change!!!');
-                    _text.attr({
-                        text: _o.text.patten.replace('{from}',
-                                    _from.text()).replace('{to}', v)
-                    });
+                    _text.attr({ text: _o.text.patten.replace('{from}',  _from.text()).replace('{to}', v) });
                 }
                 else if (_from.getId() == src.getId()) {
                     //$('body').append('change!!!');
-                    _text.attr({
-                        text: _o.text.patten.replace('{from}', v)
-                                    .replace('{to}', _to.text())
-                    });
+                    _text.attr({ text: _o.text.patten.replace('{from}', v).replace('{to}', _to.text())});
                 }
             }
         };
@@ -1697,25 +1694,18 @@
                 for (var k in data.states) {
                     if(!_states[k]){
                         var rect = new myflow.rect(
-                        $
-                                .extend(
-                                        true,
-                                        {},
-                                        myflow.config.tools.states[data.states[k].type],
-                                        data.states[k]), _r,k);
+                        $.extend(true,{},myflow.config.tools.states[data.states[k].type],data.states[k]), _r,k);
                         rect.restore(data.states[k]);
                         rmap[k] = rect;
                         _states[rect.getId()] = rect;
                     }
                 }
-            }
+            }           
             if (data.paths) {
                 for (var k in data.paths) {
                     if(!_paths[k]){
                         var from=rmap&&rmap[data.paths[k].from] || _states[data.paths[k].from];
                         var to=rmap&&rmap[data.paths[k].to] || _states[data.paths[k].to];
-
-
                         var p = new myflow.path($.extend(true, {},myflow.config.tools.path, data.paths[k]), _r, from,to,null,null,null,k);
                         p.restore(data.paths[k]);
                         _paths[p.getId()] = p;

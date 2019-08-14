@@ -17,14 +17,14 @@ $.extend(true, myflow.editors, {
 		this.destroy = function () {			
 		};
 	},
-	textEditor: function () {
+	textEditor: function () {		
 		var _props, _k, _div, _src, _r;
-		this.init = function (props, k, div, src, r) {
+		this.init = function (props, k, div, src, r) {			
 			_props = props; _k = k; _div = div; _src = src; _r = r;
 			var newInputId=src.getId();
 			newInputId+="_"+k;
 			$('<input style="width:100%;" id="'+newInputId+'"/>').val(props[_k].value).change(
-				function () {
+				function () {					
 					props[_k].value = $(this).val();
 					$(_r).trigger('textchange', [$(this).val(), _src]);
 				}).appendTo('#' + _div);

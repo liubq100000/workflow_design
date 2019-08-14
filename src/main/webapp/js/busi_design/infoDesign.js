@@ -1,18 +1,36 @@
 var infoDesign = {};
+//长度
+infoDesign.dataLen = 10;
+//关闭
+infoDesign.close = function(){
+	 window.close();
+}
 //保存
 infoDesign.save = function(){
 	var init_type = $("#init_type").val();
 	var init_flowCode = $("#init_flowCode").val();
 	var init_tarCode = $("#init_tarCode").val();
-	var defInfo01 = $("#defInfo01").val();
-	var defInfo02 = $("#defInfo02").val();
-	var defInfo03 = $("#defInfo03").val();
-	var defInfo04 = $("#defInfo04").val();
-	var defInfo05 = $("#defInfo05").val();
+	var param = {"type":init_type,"flowCode":init_flowCode,"tarCode":init_tarCode};
+	var key;
+	var tempV;
+	for(var index=0;index<infoDesign.dataLen;index++){
+		if(index<10){
+			key = "defInfo0"+index;
+		}else{
+			key = "defInfo"+index;
+		}
+		tempV = $("#"+key).val();
+		if(typeof(tempV)  == "undefined"){
+			continue;
+		}
+		if(tempV&&tempV!=''){
+			param[key] = tempV;
+		}		
+	}
 	$.ajax({
 		type : "POST",		
 		url : getRootPath()+"/design/saveExtend.action",
-		data : {"type":init_type,"flowCode":init_flowCode,"tarCode":init_tarCode,"defInfo01":defInfo01,"defInfo02":defInfo02,"defInfo03":defInfo03,"defInfo04":defInfo04,"defInfo05":defInfo05},
+		data : param,
 		dataType : "json",
 		success : function(data) {
 			alert(data.message)
@@ -31,11 +49,22 @@ infoDesign.init = function(){
 		data : {"flowCode":init_flowCode,"tarCode":init_tarCode},
 		dataType : "json",
 		success : function(data) {
-			$("#defInfo01").val(data.defInfo01);
-			$("#defInfo02").val(data.defInfo02);
-			$("#defInfo03").val(data.defInfo03);
-			$("#defInfo04").val(data.defInfo04);
-			$("#defInfo05").val(data.defInfo05);			
+			var key;
+			var tempV;
+			for(var index=0;index<infoDesign.dataLen;index++){
+				if(index<10){
+					key = "defInfo0"+index;
+				}else{
+					key = "defInfo"+index;
+				}
+				tempV = data[key];
+				if(typeof(tempV)  == "undefined"){
+					continue;
+				}
+				if(tempV&&tempV!=''){
+					$("#"+key).val(tempV);
+				}		
+			}
 		}
 	});
 };
