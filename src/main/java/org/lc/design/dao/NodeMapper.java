@@ -9,5 +9,5 @@ public interface NodeMapper {
 	
 	public java.lang.Integer insert(Node node);
 	
-	public java.lang.Integer delete();
+	public java.lang.Integer delete(Node node);
 }

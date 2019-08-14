@@ -32,7 +32,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </insert >
       
       <!-- 插入一条记录 -->  
-      <delete id ="delete">  
+      <delete id ="delete" parameterType="org.lc.design.domain.Node">  
             delete from abc_wf_node
+            <where>	 
+				<if test="id != null">
+					and id = #{id}
+				</if>
+				<if test="wfDefId != null">
+					and wf_def_id = #{wfDefId}
+				</if>
+			</where>
       </delete > 
 </mapper>  

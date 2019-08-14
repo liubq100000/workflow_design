@@ -9,5 +9,5 @@ public interface LineMapper {
 	
 	public java.lang.Integer insert(Line line);
 	
-	public java.lang.Integer delete();
+	public java.lang.Integer delete(Line line);
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding= "UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+  
+<mapper namespace= "org.lc.design.dao.InfoMapper" >  
+
+     <!-- 查询一条记录 -->  
+      <select id ="query" parameterType="org.lc.design.domain.Info" resultType="org.lc.design.domain.Info">  
+            select 
+				flow_code flowCode,
+				type type,
+				tar_code tarCode,
+				def_info01 defInfo01,
+				def_info02 defInfo02,
+				def_info03 defInfo03,
+				def_info04 defInfo04,
+				def_info05 defInfo05,
+				def_info06 defInfo06,
+				def_info07 defInfo07,
+				def_info08 defInfo08,
+				def_info09 defInfo09,
+				def_info10 defInfo10
+			 from abc_wf_info
+			 <where>	 
+				<if test="flowCode != null">
+					and flow_code = #{flowCode}
+				</if>
+				<if test="tarCode != null">
+					and tar_code = #{tarCode}
+				</if>
+			</where>
+      </select >
+      
+      <!-- 插入一条记录 -->  
+      <insert id ="insert" parameterType="org.lc.design.domain.Info">  
+            insert into  abc_wf_info(flow_code,type,tar_code,def_info01,def_info02,def_info03,def_info04,def_info05,def_info06,def_info07,def_info08,def_info09,def_info10) 
+            values (#{flowCode,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{tarCode,jdbcType=VARCHAR},#{defInfo01,jdbcType=VARCHAR},#{defInfo02,jdbcType=VARCHAR},#{defInfo03,jdbcType=VARCHAR},#{defInfo04,jdbcType=VARCHAR},#{defInfo05,jdbcType=VARCHAR},#{defInfo06,jdbcType=VARCHAR},#{defInfo07,jdbcType=VARCHAR},#{defInfo08,jdbcType=VARCHAR},#{defInfo09,jdbcType=VARCHAR},#{defInfo10,jdbcType=VARCHAR});
+      </insert >
+      
+      <!-- 插入一条记录 -->  
+      <delete id ="delete" parameterType="org.lc.design.domain.Info">  
+            delete from abc_wf_info
+            <where>	 
+				<if test="flowCode != null">
+					and flow_code = #{flowCode}
+				</if>
+				<if test="tarCode != null">
+					and tar_code = #{tarCode}
+				</if>
+			</where>
+      </delete > 
+</mapper>  

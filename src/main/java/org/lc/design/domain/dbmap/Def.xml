@@ -9,8 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <select id ="query" parameterType="org.lc.design.domain.Def" resultType="org.lc.design.domain.Def">  
             select 
 				id id,
+				code code,
 				name name,
-				max_time maxTime
+				txt txt,
+				content content
 			 from abc_wf_def
 			 <where>	 
 				<if test="id != null">
@@ -21,12 +23,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       
       <!-- 插入一条记录 -->  
       <insert id ="insert" parameterType="org.lc.design.domain.Def">  
-            insert into  abc_wf_def(id,name,max_time) 
-            values (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{maxTime,jdbcType=NUMERIC});
+            insert into  abc_wf_def(id,name,code,txt,content) 
+            values (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR},#{txt,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR});
       </insert >
       
       <!-- 插入一条记录 -->  
-      <delete id ="delete">  
+      <delete id ="delete" parameterType="org.lc.design.domain.Def">  
             delete from abc_wf_def
+            <where>	 
+				<if test="id != null">
+					and id = #{id}
+				</if>
+			</where>
       </delete > 
 </mapper>  
