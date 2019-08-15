@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="${sysPath}/js/flow/myflow.js"></script>
 	<script type="text/javascript" src="${sysPath}/js/flow/myflow.jpdl4.js"></script>
 	<script type="text/javascript" src="${sysPath}/js/flow/myflow.editors.js"></script>
-	<script type="text/javascript" src="${sysPath}/js/flow/design.js"></script>
+	<script type="text/javascript" src="${sysPath}/js/flow/mydesign.js"></script>
 </head>
 <body>
 	<input type="hidden" id="queryCondFlowId" name="queryCondFlowId" value="${flowId}">

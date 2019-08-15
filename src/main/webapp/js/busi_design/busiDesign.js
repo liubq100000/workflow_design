@@ -58,9 +58,9 @@ busiDesign.get = function(){
 			if(data){
 				var mode = $("#showMode").val();
 				if("view" == mode){
-					designFlow.view(data.json);
+					mydesign.view(data.json);
 				} else {
-					designFlow.init(data.json,busiDesign.save,busiDesign.extendInfoFun);
+					mydesign.init(data.json,busiDesign.save,busiDesign.extendInfoFun);
 				}
 				
 				

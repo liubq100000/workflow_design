@@ -9,7 +9,7 @@ $.extend(true, myflow.editors, {
 			var newInputId=src.getId();
 			newInputId+="_"+k;
 			var ahtml = "<a href=\"#\" style=\"text-decoration:none;color:#067df7;font-size: 11px;\" />";
-			$(ahtml).html("更多信息").click(function () {
+			$(ahtml).html("<<更多信息>>").click(function () {
 				myflow.config.tools.moreInfo(_nowType,myflow.config.props.props,props);
 			}).appendTo('#' + _div);
 			$('#' + _div).data('editor', this);
