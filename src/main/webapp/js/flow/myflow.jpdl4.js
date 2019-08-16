@@ -94,13 +94,13 @@ $.extend(true,myflow.config.tools.states,{
 $.extend(true,myflow.config.tools.path,{		
 	props : {		
 		code: {name:'code',label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}},
-		text: {name:'text',label: '显示', value:'连接线', editor: function(){return new myflow.editors.textEditor();}}
+		text: {name:'text',label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}}
 	}
 });
 $.extend(true,myflow.config.path,{		
 	props : {		
 		code: {name:'code',label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}},
-		text: {name:'text',label: '显示', value:'连接线', editor: function(){return new myflow.editors.textEditor();}}
+		text: {name:'text',label: '显示', value:'', editor: function(){return new myflow.editors.textEditor();}}
 	}
 });
 
