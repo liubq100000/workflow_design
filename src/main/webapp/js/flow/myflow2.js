@@ -100,14 +100,6 @@
                 }
             },
             props: {
-                text: {
-                    name: 'text',
-                    label: '显示',
-                    value: '',
-                    editor: function () {
-                        return new myflow.editors.textEditor();
-                    }
-                }
             }
         },
         tools: {// 工具栏
@@ -167,6 +159,9 @@
     };
 
     myflow.util = {
+		getCode: function () {// 产生ID
+            return "code_"+(new Date().getTime());
+        },
         isLine: function (p1, p2, p3) {// 三个点是否在一条直线上
             var s, p2y;
             if ((p1.x - p3.x) == 0)
@@ -704,23 +699,27 @@
         // 转化json字串
         this.toJson = function () {
 			var data = "{\"props\":{";
-			for (var k in _o.props) {
+			for (var k in _o.props) {				 
 				if(k == "text"){
-					continue;
-				}
-                data += "\""+k + "\":{\"value\":\"" + _o.props[k].value + "\"},";
+            		data += "\""+k + "\":{\"value\":\"" + (!_text.node.textContent ? "" : _text.node.textContent) + "\"},";
+            	} else {
+            		data += "\""+k + "\":{\"value\":\"" + _o.props[k].value + "\"},";
+            	}               
             }
-			if (data.substring(data.length - 1, data.length) == ',')
-                data = data.substring(0, data.length - 1);
-            data += "},\"type\":\"" + _o.type + "\",\"ID\":\"" + (!_o.ID ? "" : _o.ID) + "\",\"text\":{\"text\":\""
-                + (!_text.node.textContent ? "" : _text.node.textContent) + "\"}, \"attr\":{ \"x\":"
-                + Math.round(_rect.attr('x')) + ",\"y\":"
-                + Math.round(_rect.attr('y')) + ", \"width\":"
-                + Math.round(_rect.attr('width')) + ", \"height\":"
-                + Math.round(_rect.attr('height')) + "},";
-           
-            if (data.substring(data.length - 1, data.length) == ',')
-                data = data.substring(0, data.length - 1);
+			if (data.substring(data.length - 1, data.length) == ','){
+				 data = data.substring(0, data.length - 1);
+			}               
+            data += "}";
+            data += ",\"type\":\"" + _o.type + "\"";
+            data += ",\"ID\":\"" + (!_o.ID ? "" : _o.ID) + "\"";
+            data += ",\"text\":{";
+            data += "	\"text\":\"" + (!_text.node.textContent ? "" : _text.node.textContent) + "\"}";
+            data += "	,\"attr\":{ ";
+            data += "		\"x\":" + Math.round(_rect.attr('x'));
+            data += "		,\"y\":" + Math.round(_rect.attr('y'));
+            data += "		,\"width\":" + Math.round(_rect.attr('width'));
+            data += "		,\"height\":" + Math.round(_rect.attr('height'));
+            data += "}";                       
             data += "}";
             return data;
         };
@@ -775,8 +774,10 @@
 
     myflow.path = function (o, r, from, to, guid, ec,dots,id) {
         var _this = this, _r = r, _o = $.extend(true, {}, myflow.config.path), _path,_markpath, _arrow, _text, _textPos = _o.text.textPos, _ox, _oy, _from = from, _to = to, _id = id || 'path'
-            + myflow.util.nextId(), _dotList, _autoText = true; _o.lineID = guid; oec = (ec > 0 ? (parseInt(ec) == 1 ? 25 : parseInt(ec) * 9 + 22) : 0);
-
+            + myflow.util.nextId(), _dotList, _autoText = true; _o.lineID = guid; oec = (ec > 0 ? (parseInt(ec) == 1 ? 25 : parseInt(ec) * 9 + 22) : 0);       
+        if(typeof(_o.props["code"]) == 'undifinded' || _o.props["code"].value == ''){
+        	_o.props["code"].value=myflow.util.getCode();
+        } 
         // 点
         function dot(type, pos, left, right) {
             var _this = this, _t = type, _n, _lt = left, _rt = right, _ox, _oy, // 缓存移动前时位置
@@ -1203,20 +1204,14 @@
                 _autoText = false;
             }
             //$('body').append('['+_autoText+','+_text.attr('text')+','+src.getId()+','+_to.getId()+']');
-            if (_autoText) {
+            if (false) {
                 if (_to.getId() == src.getId()) {
                     //$('body').append('change!!!');
-                    _text.attr({
-                        text: _o.text.patten.replace('{from}',
-                                    _from.text()).replace('{to}', v)
-                    });
+                    _text.attr({ text: _o.text.patten.replace('{from}',  _from.text()).replace('{to}', v) });
                 }
                 else if (_from.getId() == src.getId()) {
                     //$('body').append('change!!!');
-                    _text.attr({
-                        text: _o.text.patten.replace('{from}', v)
-                                    .replace('{to}', _to.text())
-                    });
+                    _text.attr({ text: _o.text.patten.replace('{from}', v).replace('{to}', _to.text())});
                 }
             }
         };
@@ -1231,17 +1226,28 @@
         };
         // 转化json数据
         this.toJson = function () {
-            var data = "{\"lineID\":\"" + (!_o.lineID ? "" : _o.lineID) + "\",\"from\":\"" + _from.getId() + "\",\"to\":\"" + _to.getId()
-                + "\", \"dots\":" + _dotList.toJson() + ",\"text\":{\"text\":\""
-                + _text.attr('text') + "\",\"textPos\":{\"x\":"
-                + Math.round(_textPos.x) + ",\"y\":" + Math.round(_textPos.y)
-                + "}}, \"props\":{";
+        	var data = "{" 
+            data += "\"lineID\":\"" + (!_o.lineID ? "" : _o.lineID) + "\"";
+        	data += ",\"from\":\"" + _from.getId() + "\"";
+        	data += ",\"to\":\"" + _to.getId() + "\"";
+        	data += ",\"dots\":" + _dotList.toJson(); 
+        	data += ",\"text\":{"; 
+        	data += "   \"text\":\"" + _text.attr('text') + "\"" 
+        	data += "  ,\"textPos\":{\"x\":"+ Math.round(_textPos.x) + ",\"y\":" + Math.round(_textPos.y) + "}"; 
+        	data += "}";        	
+        	data += ",\"props\":{";
             for (var k in _o.props) {
-                data += "\""+k + "\":{\"value\":\"" + _o.props[k].value + "\"},";
+            	if(k == "text"){
+            		data += "\""+k + "\":{\"value\":\"" + _text.attr('text') + "\"},";
+            	} else {
+            		data += "\""+k + "\":{\"value\":\"" + _o.props[k].value + "\"},";
+            	}	                
             }
-            if (data.substring(data.length - 1, data.length) == ',')
-                data = data.substring(0, data.length - 1);
-            data += '}}';
+            if (data.substring(data.length - 1, data.length) == ','){
+            	data = data.substring(0, data.length - 1);
+            }
+            data += '}';
+            data += '}';
             return data;
         };
         // 恢复
@@ -1343,12 +1349,10 @@
                 if (e)
                     e.destroy();
             });
-
             _tb.empty();
             _pdiv.show();
             for (var k in props) {
-                _tb.append('<tr><th>' + props[k].label + '</th><td><div id="p'
-                    + k + '" class="editor"></div></td></tr>');
+                _tb.append('<tr><th>' + props[k].label + '</th><td><div id="p' + k + '" class="editor"></div></td></tr>');
                 if (props[k].editor)
                     props[k].editor().init(props, k, 'p' + k, src, _r);                
             }
@@ -1374,7 +1378,6 @@
 
         $.extend(true, myflow.config, o);
 
-
         /**
         * 删除： 删除状态时，触发removerect事件，连接在这个状态上当路径监听到这个事件，触发removepath删除自身；
         * 删除路径时，触发removepath事件
@@ -1382,7 +1385,7 @@
         $(document).keydown(function (arg) {
             if (!myflow.config.editable)
                 return;
-            if (arg.keyCode == 46 || (arg.originalEvent && arg.originalEvent.code == 'Backspace')) {
+            if (arg.keyCode == 46) {
                 var c = $(_r).data('currNode');
                 if (c) {
                     if (c.getId().substring(0, 4) == 'rect') {
@@ -1578,8 +1581,9 @@
                         data +="\""+ _states[k].getId() + '\":' + _states[k].toJson() + ',';
                     }
                 }
-                if (data.substring(data.length - 1, data.length) == ',')
-                    data = data.substring(0, data.length - 1);
+                if (data.substring(data.length - 1, data.length) == ','){
+                	data = data.substring(0, data.length - 1);
+                }
                 data += '}';
 				data += ',\"paths\":{';
                 for (var k in _paths) {
@@ -1587,9 +1591,9 @@
                         data += "\"" + _paths[k].getId() + '\":' + _paths[k].toJson() + ',';
                     }
                 }
-                if (data.substring(data.length - 1, data.length) == ',')
-                    data = data.substring(0, data.length - 1);
-                //data += '},props:{props:{';
+                if (data.substring(data.length - 1, data.length) == ','){
+                	data = data.substring(0, data.length - 1);
+                }
                 data += '}';
 				data += ',\"infos\":{';
 				var tempProp = myflow.config.props.props;
@@ -1598,8 +1602,9 @@
                         data += "\""+tempProp[k].name  + "\":\"" + tempProp[k].value + "\",";
                     }
                 }
-                if (data.substring(data.length - 1, data.length) == ',')
-                    data = data.substring(0, data.length - 1);
+                if (data.substring(data.length - 1, data.length) == ','){
+                	data = data.substring(0, data.length - 1);
+                }                    
 				data += '}';
 				data += '}';
                 return data;
@@ -1689,25 +1694,18 @@
                 for (var k in data.states) {
                     if(!_states[k]){
                         var rect = new myflow.rect(
-                        $
-                                .extend(
-                                        true,
-                                        {},
-                                        myflow.config.tools.states[data.states[k].type],
-                                        data.states[k]), _r,k);
+                        $.extend(true,{},myflow.config.tools.states[data.states[k].type],data.states[k]), _r,k);
                         rect.restore(data.states[k]);
                         rmap[k] = rect;
                         _states[rect.getId()] = rect;
                     }
                 }
-            }
+            }           
             if (data.paths) {
                 for (var k in data.paths) {
                     if(!_paths[k]){
                         var from=rmap&&rmap[data.paths[k].from] || _states[data.paths[k].from];
                         var to=rmap&&rmap[data.paths[k].to] || _states[data.paths[k].to];
-
-
                         var p = new myflow.path($.extend(true, {},myflow.config.tools.path, data.paths[k]), _r, from,to,null,null,null,k);
                         p.restore(data.paths[k]);
                         _paths[p.getId()] = p;

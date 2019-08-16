@@ -100,8 +100,6 @@
                 }
             },
             props: {
-            	code: {name:'code',label: '编码', value:'',editor: function(){return new myflow.editors.inputEditor();}},
-                text: {name:'text',label: '显示', value:'',editor: function(){return new myflow.editors.textEditor();}}
             }
         },
         tools: {// 工具栏
@@ -161,6 +159,9 @@
     };
 
     myflow.util = {
+		getCode: function () {// 产生ID
+            return "code_"+(new Date().getTime());
+        },
         isLine: function (p1, p2, p3) {// 三个点是否在一条直线上
             var s, p2y;
             if ((p1.x - p3.x) == 0)
@@ -775,7 +776,7 @@
         var _this = this, _r = r, _o = $.extend(true, {}, myflow.config.path), _path,_markpath, _arrow, _text, _textPos = _o.text.textPos, _ox, _oy, _from = from, _to = to, _id = id || 'path'
             + myflow.util.nextId(), _dotList, _autoText = true; _o.lineID = guid; oec = (ec > 0 ? (parseInt(ec) == 1 ? 25 : parseInt(ec) * 9 + 22) : 0);       
         if(typeof(_o.props["code"]) == 'undifinded' || _o.props["code"].value == ''){
-        	_o.props["code"].value="code_"+(new Date().getTime());
+        	_o.props["code"].value=myflow.util.getCode();
         } 
         // 点
         function dot(type, pos, left, right) {
@@ -1377,7 +1378,6 @@
 
         $.extend(true, myflow.config, o);
 
-
         /**
         * 删除： 删除状态时，触发removerect事件，连接在这个状态上当路径监听到这个事件，触发removepath删除自身；
         * 删除路径时，触发removepath事件
@@ -1385,7 +1385,7 @@
         $(document).keydown(function (arg) {
             if (!myflow.config.editable)
                 return;
-            if (arg.keyCode == 46 || (arg.originalEvent && arg.originalEvent.code == 'Backspace')) {
+            if (arg.keyCode == 46) {
                 var c = $(_r).data('currNode');
                 if (c) {
                     if (c.getId().substring(0, 4) == 'rect') {

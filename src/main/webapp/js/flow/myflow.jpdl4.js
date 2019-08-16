@@ -9,14 +9,14 @@ $.extend(true,myflow.config.rect,{
 	"stroke-width" : 2
 }
 });
-
+//流程
 $.extend(true,myflow.config.props.props,{
 	code : {name:'code', label:'编码', value:'', editor:function(){return new myflow.editors.inputEditor();}},
 	name : {name:'name', label:'名称', value:'流程'+(new Date().getTime()), editor:function(){return new myflow.editors.inputEditor();}},	
 	desc : {name:'desc', label:'描述', value:'', editor:function(){return new myflow.editors.inputEditor();}}
 });
 
-
+//节点
 $.extend(true,myflow.config.tools.states,{
 	start : {
 		showType: 'image',
@@ -90,13 +90,18 @@ $.extend(true,myflow.config.tools.states,{
 });
 
 
-
+//连接线
 $.extend(true,myflow.config.tools.path,{		
 	props : {		
 		code: {name:'code',label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}},
 		text: {name:'text',label: '显示', value:'连接线', editor: function(){return new myflow.editors.textEditor();}}
 	}
 });
-
+$.extend(true,myflow.config.path,{		
+	props : {		
+		code: {name:'code',label: '编码', value:'', editor: function(){return new myflow.editors.inputEditor();}},
+		text: {name:'text',label: '显示', value:'连接线', editor: function(){return new myflow.editors.textEditor();}}
+	}
+});
 
 })(jQuery);

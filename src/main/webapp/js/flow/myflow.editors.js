@@ -48,7 +48,7 @@ $.extend(true, myflow.editors, {
 			newInputId+="_"+k;
 			var nowValue=props[_k].value;
 			if(_k=='code'&&nowValue == ''){
-				nowValue = _k+"_"+(new Date().getTime());
+				nowValue = myflow.util.getCode();
 				props[_k].value = nowValue;
 			}
 			$('<input style="width:100%;" id="'+newInputId+'"/>').val(props[_k].value).change(function(){
