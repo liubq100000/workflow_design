@@ -47,7 +47,7 @@
     </build>
     <properties>
         <!-- spring版本号 -->
-        <spring.version>4.0.2.RELEASE</spring.version>
+        <spring.version>5.2.6.RELEASE</spring.version>
         <!-- jackson版本号 -->
         <jackson.version>2.11.0</jackson.version>
         <!-- common版本号 -->
